@@ -23,7 +23,7 @@ export default function HistoryPage() {
         title: "Finding Us",
         date: "2023",
         text: "A year of growing closer, learning each other, and creating memories that stuck.",
-        imageSrc: "/history/Year1.jpg",
+        imageSrc: "/history/Year1.JPG",
       },
       {
         title: "Big Moments",
