@@ -27,4 +27,12 @@ body {
 .font-cursive {
   font-family: var(--font-cursive);
 }
+@media (prefers-color-scheme: dark) {
+  html,
+  body {
+    background-color: white;
+    color: black;
+  }
+}
+
 
