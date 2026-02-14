@@ -28,19 +28,19 @@ export default function HistoryPage() {
       {
         title: "Big Moments",
         date: "2024",
-        text: "Milestones, challenges, trips, or moments that really defined this year.",
+        text: "We overcame milestones, challenges, went on trips, and had so many unforgettable moments that made us stronger.",
         imageSrc: "/history/Year2.jpg",
       },
       {
         title: "Building Together",
         date: "2025",
-        text: "What life started to look like as things became more serious and future-focused.",
+        text: "We built off eachoher and made eachother better people.",
         imageSrc: "/history/Year3.jpg",
       },
       {
         title: "Now & Beyond",
         date: "2026",
-        text: "Where you are now and what you’re excited about moving forward.",
+        text: "Here we are, continuing to grow and excited for the future",
         imageSrc: "/history/Year4.jpg",
       },
     ],
