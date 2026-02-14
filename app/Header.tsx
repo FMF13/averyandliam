@@ -1,48 +1,67 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+  const pathname = usePathname();
+
+  const linkClass = (path: string) =>
+    `relative pb-0.5 transition-colors ${
+      pathname === path ? "text-black" : "text-gray-700 hover:text-black"
+    }
+    after:absolute after:left-0 after:bottom-0 after:h-[1px] after:bg-black
+    after:transition-all after:duration-300
+    ${pathname === path ? "after:w-full" : "after:w-0 hover:after:w-full"}`;
+
   return (
     <header className="w-full border-b bg-white">
-      <div className="mx-auto max-w-6xl px-4 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        
-        {/* Left: Title */}
-        <div className="text-center sm:text-left">
-          <Link
-            href="/"
-            className="font-cursive text-2xl sm:text-3xl leading-none"
-          >
-            Avery & Liam
-          </Link>
-        </div>
+      <div
+        className="
+          px-4 sm:px-8
+          py-4 sm:py-6
+          flex flex-col sm:flex-row        /* ← CHANGE #1 */
+          items-center
+          gap-3 sm:gap-0                  /* ← CHANGE #2 */
+          sm:justify-between
+        "
+      >
+        {/* Left: Name */}
+        <Link
+          href="/"
+          className="
+            font-cursive
+            text-2xl sm:text-3xl
+            leading-none
+            whitespace-nowrap
+          "
+        >
+          Avery & Liam
+        </Link>
 
-        {/* Right: Nav */}
-        <nav className="flex justify-center sm:justify-end gap-4 sm:gap-6 text-xs sm:text-sm tracking-wide">
-          <Link
-            href="/100"
-            className="relative hover:opacity-80 after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-black hover:after:w-full after:transition-all"
-          >
-            100
+        {/* Right: Navigation */}
+        <nav
+          className="
+            flex flex-wrap sm:flex-nowrap   /* ← CHANGE #3 */
+            justify-center sm:justify-end
+            items-center
+            gap-4 sm:gap-6 md:gap-10
+            text-[11px] sm:text-xs md:text-sm
+            uppercase
+            tracking-normal sm:tracking-wide md:tracking-widest
+          "
+        >
+          <Link href="/valentines" className={linkClass("/valentines")}>
+            Valentine's
           </Link>
-
-          <Link
-            href="/history"
-            className="relative hover:opacity-80 after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-black hover:after:w-full after:transition-all"
-          >
+          <Link href="/places" className={linkClass("/places")}>
+            Places
+          </Link>
+          <Link href="/history" className={linkClass("/history")}>
             History
           </Link>
-
-          <Link
-            href="/pictures"
-            className="relative hover:opacity-80 after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-black hover:after:w-full after:transition-all"
-          >
+          <Link href="/pictures" className={linkClass("/pictures")}>
             Pictures
-          </Link>
-
-          <Link
-            href="/valentines"
-            className="relative hover:opacity-80 after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-black hover:after:w-full after:transition-all"
-          >
-            Valentines
           </Link>
         </nav>
       </div>
