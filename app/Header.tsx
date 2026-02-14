@@ -1,57 +1,48 @@
-"use client";
-
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 export default function Header() {
-  const pathname = usePathname();
-
-  const linkClass = (path: string) =>
-    `relative pb-0.5 transition-colors ${
-      pathname === path ? "text-black" : "text-gray-700 hover:text-black"
-    }
-    after:absolute after:left-0 after:bottom-0 after:h-[1px] after:bg-black
-    after:transition-all after:duration-300
-    ${pathname === path ? "after:w-full" : "after:w-0 hover:after:w-full"}`;
-
   return (
     <header className="w-full border-b bg-white">
-      <div className="px-4 sm:px-8 py-4 sm:py-6 flex items-center justify-between">
-        {/* Left: Name */}
-        <Link
-          href="/"
-          className="
-            font-cursive
-            text-2xl sm:text-3xl
-            leading-none
-            whitespace-nowrap
-          "
-        >
-          Avery & Liam
-        </Link>
+      <div className="mx-auto max-w-6xl px-4 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        
+        {/* Left: Title */}
+        <div className="text-center sm:text-left">
+          <Link
+            href="/"
+            className="font-cursive text-2xl sm:text-3xl leading-none"
+          >
+            Avery & Liam
+          </Link>
+        </div>
 
-        {/* Right: Navigation */}
-        <nav
-          className="
-            flex items-center
-            gap-4 sm:gap-6 md:gap-10
-            text-[11px] sm:text-xs md:text-sm
-            uppercase
-            tracking-normal sm:tracking-wide md:tracking-widest
-            whitespace-nowrap
-          "
-        >
-          <Link href="/valentines" className={linkClass("/valentines")}>
-            Valentine's
+        {/* Right: Nav */}
+        <nav className="flex justify-center sm:justify-end gap-4 sm:gap-6 text-xs sm:text-sm tracking-wide">
+          <Link
+            href="/100"
+            className="relative hover:opacity-80 after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-black hover:after:w-full after:transition-all"
+          >
+            100
           </Link>
-          <Link href="/places" className={linkClass("/places")}>
-            Places
-          </Link>
-          <Link href="/history" className={linkClass("/history")}>
+
+          <Link
+            href="/history"
+            className="relative hover:opacity-80 after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-black hover:after:w-full after:transition-all"
+          >
             History
           </Link>
-          <Link href="/pictures" className={linkClass("/pictures")}>
+
+          <Link
+            href="/pictures"
+            className="relative hover:opacity-80 after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-black hover:after:w-full after:transition-all"
+          >
             Pictures
+          </Link>
+
+          <Link
+            href="/valentines"
+            className="relative hover:opacity-80 after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-black hover:after:w-full after:transition-all"
+          >
+            Valentines
           </Link>
         </nav>
       </div>
