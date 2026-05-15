@@ -26,7 +26,7 @@ global edgeHwnd := 0
 LaunchEdge() {
     global URL, edgeHwnd
     before := WinGetList("ahk_exe msedge.exe")
-    Run('msedge.exe --new-window "' URL '"')
+    Run('msedge.exe --app="' URL '"')
     deadline := A_TickCount + 10000
     while (A_TickCount < deadline) {
         Sleep 200
