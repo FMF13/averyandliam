@@ -25,28 +25,15 @@ global edgeHwnd := 0
 
 LaunchEdge() {
     global URL, edgeHwnd
-    before := WinGetList("ahk_exe msedge.exe")
     Run('msedge.exe --app="' URL '"')
-    deadline := A_TickCount + 10000
-    while (A_TickCount < deadline) {
-        Sleep 200
-        for hwnd in WinGetList("ahk_exe msedge.exe") {
-            isNew := true
-            for old in before {
-                if (hwnd = old) {
-                    isNew := false
-                    break
-                }
-            }
-            if (isNew) {
-                edgeHwnd := hwnd
-                WinActivate("ahk_id " edgeHwnd)
-                Sleep 800
-                Send "{F11}"
-                return
-            }
-        }
+    Sleep 2500
+    try {
+        if (WinGetProcessName("A") = "msedge.exe")
+            edgeHwnd := WinGetID("A")
     }
+    Sleep 300
+    if (edgeHwnd)
+        Send "{F11}"
 }
 
 LaunchPowerPoint() {
@@ -80,8 +67,17 @@ ShowPowerPoint() {
 
 ShowEdge() {
     global edgeHwnd
-    if (edgeHwnd && WinExist("ahk_id " edgeHwnd))
+    if (edgeHwnd && WinExist("ahk_id " edgeHwnd)) {
         WinActivate("ahk_id " edgeHwnd)
-    else
+        Sleep 200
+        try {
+            if (WinGetStyle("ahk_id " edgeHwnd) & 0xC00000)
+                Send "{F11}"
+        } catch {
+            edgeHwnd := 0
+            LaunchEdge()
+        }
+    } else {
         LaunchEdge()
+    }
 }
