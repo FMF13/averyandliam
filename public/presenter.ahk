@@ -45,19 +45,19 @@ LaunchPowerPoint() {
     MsgBox("POWERPNT.EXE not found — edit LaunchPowerPoint() in the script.")
 }
 
-F9:: ToggleApps()
+F9:: ShowPowerPoint()
+F10:: ShowEdge()
 
-ToggleApps() {
-    activeIsPpt := WinActive("ahk_class screenClass")
-    if (activeIsPpt) {
-        if WinExist("ahk_exe msedge.exe")
-            WinActivate("ahk_exe msedge.exe")
-        else
-            LaunchEdge()
-    } else {
-        if WinExist("ahk_class screenClass")
-            WinActivate("ahk_class screenClass")
-        else
-            LaunchPowerPoint()
-    }
+ShowPowerPoint() {
+    if WinExist("ahk_class screenClass")
+        WinActivate("ahk_class screenClass")
+    else
+        LaunchPowerPoint()
+}
+
+ShowEdge() {
+    if WinExist("ahk_exe msedge.exe")
+        WinActivate("ahk_exe msedge.exe")
+    else
+        LaunchEdge()
 }
