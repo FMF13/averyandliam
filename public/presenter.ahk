@@ -21,9 +21,32 @@ CheckSchedule() {
     }
 }
 
+global edgeHwnd := 0
+
 LaunchEdge() {
-    global URL
-    Run('msedge.exe --new-window --start-fullscreen "' URL '"')
+    global URL, edgeHwnd
+    before := WinGetList("ahk_exe msedge.exe")
+    Run('msedge.exe --new-window "' URL '"')
+    deadline := A_TickCount + 10000
+    while (A_TickCount < deadline) {
+        Sleep 200
+        for hwnd in WinGetList("ahk_exe msedge.exe") {
+            isNew := true
+            for old in before {
+                if (hwnd = old) {
+                    isNew := false
+                    break
+                }
+            }
+            if (isNew) {
+                edgeHwnd := hwnd
+                WinActivate("ahk_id " edgeHwnd)
+                Sleep 800
+                Send "{F11}"
+                return
+            }
+        }
+    }
 }
 
 LaunchPowerPoint() {
@@ -56,8 +79,9 @@ ShowPowerPoint() {
 }
 
 ShowEdge() {
-    if WinExist("ahk_exe msedge.exe")
-        WinActivate("ahk_exe msedge.exe")
+    global edgeHwnd
+    if (edgeHwnd && WinExist("ahk_id " edgeHwnd))
+        WinActivate("ahk_id " edgeHwnd)
     else
         LaunchEdge()
 }
